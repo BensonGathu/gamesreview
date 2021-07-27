@@ -16,13 +16,13 @@ class Profile(models.Model):
 
 class Game(models.Model):
     GAME_TYPE = (
-    (Action, "Action"),
-    (Adventure, "Adventure"),
-    (Role-playing, "Role-playing"),
-    (Simulation, "Simulation"),
-    (Strategy, "Strategy"),
-    (Sports, "Sports"),
-    (Puzzle, "Puzzle"),
+    ("Action" , "Action"),
+    ("Adventure", "Adventure"),
+    ("Role-playing", "Role-playing"),
+    ("Simulation", "Simulation"),
+    ("Strategy", "Strategy"),
+    ("Sports", "Sports"),
+    ("Puzzle", "Puzzle"),
     )
 
     user = models.ForeignKey(User,on_delete=models.CASCADE)
