@@ -2,5 +2,9 @@
 
 
 {% block content %}
-{{game}}
+{% for game in games %}
+ {{game.title}}
+
+{%endfor%}
 {%endblock%}
+
