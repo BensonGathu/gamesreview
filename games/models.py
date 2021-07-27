@@ -14,6 +14,9 @@ class Profile(models.Model):
     def save_profile(self):
         self.save()
 
+    def delete_profile(self):
+        self.delete()
+
 class Game(models.Model):
     GAME_TYPE = (
     ("Action" , "Action"),
@@ -36,6 +39,8 @@ class Game(models.Model):
     def save_game(self):
         self.save()
 
+    def delete_game(self):
+        self.delete()
     @classmethod
     def search_game(cls,title):
         return cls.objects.filter(title__icontains=title).all()
