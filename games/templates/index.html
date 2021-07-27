@@ -4,7 +4,7 @@
 {% block content %}
 {% for game in games %}
  {{game.title}}
-{{game.trailer_link}}
+<a href="{{game.trailer_link}}" target="_blank" ><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
 {%endfor%}
 {%endblock%}
 

@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,get_object_or_404
 from . models import Profile,Game,Review
+from .forms import GameUploadForm,NewReviewForm
 # Create your views here.
 
 def index(request):
@@ -14,7 +15,7 @@ def reviews(request,id):
     form = NewReviewForm()
     if request.method == 'POST':
         form = NewReviewForm(request.POST)
-        if form.is_valid()
+        if form.is_valid():
             review = form.save(commit=False)
             review.game = game
             review.user = request.user
@@ -37,4 +38,14 @@ def upload_game(request):
     pass
 
 def search_game(request):
-    pass
+    if 'game' in request.GET and request.GET['game']:
+        search_game = request.GET.get('game')
+        searched_game = Game.search_game(search_game)
+        message = f'{search_game}'
+
+        return render(request,'results.html',{"message":message,"searched_game":searched_game})
+
+    else:
+        message = "Search a game"
+        return render(request,'results.html',{"message":message})
+

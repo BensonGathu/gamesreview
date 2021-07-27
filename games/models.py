@@ -31,6 +31,7 @@ class Game(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     title = models.CharField(max_length=250)
     trailer_link = models.URLField(max_length=30000)
+    description = models.TextField()
     game_type = models.CharField(max_length=250,choices=GAME_TYPE,default="Select type of game")
     date_created = models.DateTimeField(auto_now_add=True)
     def __str__(self):

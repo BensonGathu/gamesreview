@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'games',
     'crispy_forms',
     'django_bootstrap5',
+    'star_ratings',
+
 ]
 
 MIDDLEWARE = [

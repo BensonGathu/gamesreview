@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load ratings %}
+{% block content %}
+
+
+
+<h3 class="text-center m-4">Game</h3>
+<hr>
+    <div class = container>
+        <div class="card" >
+            <img class="card-img-top" width="500" height="500" src="" alt="-------">
+            <div class="card-body">
+              <h4 class="text-center"> <b>{{game.title}}</b></h4>
+              <p class="card-text">{{game.description}}</p>
+              <a href="{{game.trailer_link}}" target="_blank"></a>
+              <p class="card-text"><small class="text-muted">{{game.date|date}}</small></p>
+            </div>
+          </div>
+
+        <div class="col-md-4">
+            <p><strong>Overall Rating</strong></p>
+            <span>{% ratings game icon_height=20 icon_width=20 %}</span>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+

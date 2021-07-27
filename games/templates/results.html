@@ -1,0 +1,33 @@
+{%extends 'base.html'%} 
+{% block content %}
+<div class="container">
+
+  <div class="row">
+    {% if searched_game%}
+      <h2>{{ searched_games|length }} games with the name {{ message }} found</h2>
+    {% else %}
+      <h2> No games found with name {{message}}</h2>
+    {% endif %}
+
+  </div>
+
+  <div class="row">
+    {% if searched_game %}
+  {% for game in searched_game %}
+  <div class="row">
+    <div class="col-xs-18 col-sm-6 col-md-3">
+    <div class="thumbnail" data-toggle="modal" data-target="#{{image.id}}" style="width:300px; height: 300px;">
+       <img src="{{profile.profile_photo.url}}" alt="{{image.name}}" class="img-fluid img-thumbnail" style="width:280px; height: 200px;" >
+    <h4 class="text-center"> <b>{{profile.user.username}}</b></h4>
+    <!-- <p>{{image.desc}}</p> -->
+</div>
+</div>
+   
+
+  {% endfor %}
+  
+    {% endif %}
+  </div>
+</div>
+  {%endblock%}
+
