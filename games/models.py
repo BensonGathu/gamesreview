@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+# from embeddify import Embedder
+from embed_video.fields import EmbedVideoField
+
 # Create your models here.
 
 class Profile(models.Model):
@@ -30,9 +33,9 @@ class Game(models.Model):
 
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     title = models.CharField(max_length=250)
-    trailer_link = models.URLField(max_length=30000)
     description = models.TextField()
     game_type = models.CharField(max_length=250,choices=GAME_TYPE,default="Select type of game")
+    video = EmbedVideoField()
     date_created = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.title
@@ -45,6 +48,11 @@ class Game(models.Model):
     @classmethod
     def search_game(cls,title):
         return cls.objects.filter(title__icontains=title).all()
+
+    @classmethod
+    def convert_link(cls,trailer_link):
+        embedder = Embedder()
+        return embedder(trailer_link)
 
     
 

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_bootstrap5',
     'star_ratings',
+    'embed_video',
 
 ]
 

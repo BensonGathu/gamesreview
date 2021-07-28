@@ -1,11 +1,15 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from . models import Profile,Game,Review
 from .forms import GameUploadForm,NewReviewForm
+from embeddify import Embedder
 # Create your views here.
 
 def index(request):
+    
     games = Game.objects.order_by("-id")
-    return render(request,'index.html',{'games':games})
+    # for game in games:
+    #     link = Game.convert_link(game.trailer_link)
+    return render(request,'index.html',{'games':games,})
 
 
 def reviews(request,id):
