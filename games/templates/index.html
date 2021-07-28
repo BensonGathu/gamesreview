@@ -4,13 +4,28 @@
 
 
 {% block content %}
+<div class="container-fluid">
 {% for game in games %}
- {{game.title}}
-
-<a href="{{game.video}}" target="_blank" ><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
-
-{% video game.video 'small' %}
+<div class="row">
+ <div class="card" style="width: 18rem;">
+    {% video game.video 'small' %}
+    <div class="card-body">
+      <h5 class="card-title">{{game.title}}</h5>
+      <p class="card-text"><a href="{{game.video}}" target="_blank" ><i class="fa fa-youtube-play" aria-hidden="true"></i></a></p>
+      <a href="{%url 'singlegame' game.id%}" class="btn btn-primary">Review</a>
+    </div>
+</div>
 {%endfor%}
-
+</div>
+</div>
 {%endblock%}
 
+
+<div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>

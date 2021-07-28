@@ -16,7 +16,7 @@
           <p class="card-text"><small class="text-muted">{{game.date|date}}</small></p>
         </div>
       </div>
-
+      
       <form  action="{%url 'singlegame' game.id%}" method="post" enctype="multipart/form-data">
         {%csrf_token%}
     
@@ -24,14 +24,31 @@
         <input type="submit" class="btn btn-success btn-lg" value="Post Review">
       </form>
     </div>
-    <div class="col">
+    <div class="col ">
+      <div class="row">
+        <div class="col-md-5">
       {% for reviews in all_reviews %}
-      {{reviews.review}}
-
+      
+      <div class="card "  style="width: 18rem;">
+        
+        <div class="card-body">
+        
+          <p class="card-text"><b>{{reviews.user}}:</b> <i>{{reviews.review}}</i></p>
+          <span><a href="{{reviews.link}}" target="_blank">{{reviews.link}}</a></span>
+        
+        </div>
+      </div>
       {%endfor%}
     </div>
+  
+  <div class="col-md-1" style="padding-left: 120px;">
+      <p><strong>Overall Rating</strong></p>
+      <span>{% ratings game icon_height=20 icon_width=20 %}</span>
+    </div>
   </div>
-</div>
+  </div>
+  </div>
+  </div>
 {% endblock %}
 
 
