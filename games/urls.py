@@ -5,9 +5,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('',views.index,name='index'),
-    path('review/<int:id>/',views.reviews,name='reviews'),
+    path('reviews/<int:id>/',views.reviews,name='reviews'),
     path('game/<int:id>/',views.singlegame,name='singlegame'),
-    path('search/',views.search_game,name='searchgame')
+    path('search/',views.search_game,name='searchgame'),
+    path('profile/',views.profile,name='profile'),
+    path('uploadgame/',views.upload_game,name='uploadgame'),
 ]
 
 if settings.DEBUG:

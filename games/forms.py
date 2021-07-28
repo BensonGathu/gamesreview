@@ -9,4 +9,9 @@ class NewReviewForm(forms.ModelForm):
 class GameUploadForm(forms.ModelForm):
     class Meta:
         model = Game
-        fields = ['title','video','game_type','description']
+        fields = ['title','description','game_type','video']
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['profile_pic','bio','contact']

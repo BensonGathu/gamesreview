@@ -1,0 +1,82 @@
+{% extends 'base.html'%}
+
+{% block content %}
+{% for profile in profile %}
+<div class="container" style="margin-top:8%">
+<div class="content-section">
+    <div class="row">
+        <div class="col-md-6">
+           
+    <div class="media">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    <img class="rounded-circle account-img"  src="{{profile.profile_pic.url}}" width="100%">
+                </div>
+                <div class="col-md-6 mt-3">
+                    <div class="media-body">
+                        <div class="account-heading"><span
+                                class="mr-3 text-secondary username">{{ profile.username }}</span>
+                            <a class="btn btn-sm btn-outline-secondary mr-3" data-toggle="modal"
+                                data-target=".bd-example-modal-md"><strong>Edit Profile</strong></a>
+                        </div>
+                        
+                        <h5><b>Username :</b>{{ profile.user }}</h5>
+                        <p class=""><b>Bio :</b>{{profile.bio }}</p>
+                        <i><b>Contact :</b>{{profile.contact}}</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+        </div>
+        <div class="col-md-6">
+
+    <div class="modal fade bd-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-md ">
+            <div class="modal-content">
+                <form action="{% url 'profile' %}" method="post" novalidate enctype="multipart/form-data" class="mr-4 mt-4 ml-4 mb-4">
+                    {% csrf_token%}
+                    {{form}}
+                    <button type="submit" class="btn btn-primary btn-sm"> Update Profile</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <form action="{% url 'profile' %}" method="post" novalidate enctype="multipart/form-data" class="mr-4 mt-4 ml-4 mb-4">
+        {% csrf_token%}
+        {{ form}}
+        <button type="submit" class="btn btn-primary btn-sm"> Update Profile</button>
+    </form>
+</div>
+</div>
+</div>
+
+    <hr>
+
+<h5> <b> My Games</b></h5>
+<div class="container">
+{% for game in games %}
+<div class="row">
+    <div class="col-xs-18 col-sm-6 col-md-3">
+        <div class="thumbnail" data-toggle="modal" style="width:300px; height: 300px;">
+    <h4>{{game.title}}</h4>
+    <p>{{game.description}}</p>
+    <a href="{{game.video}}" target="_blank" ><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+
+        </div>
+    
+</div>
+{% endfor %}
+</div>
+</div>
+</div>
+{%endblock%}
+
+

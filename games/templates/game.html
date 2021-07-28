@@ -1,12 +1,52 @@
 {% extends 'base.html' %}
 {% load ratings %}
 {% block content %}
+{% load django_bootstrap5 %}
+{% load embed_video_tags %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      
+      <div class="card" >
+        {% video game.video 'medium' %}
+        <div class="card-body">
+          <h4 class="text-center"> <b>{{game.title}}</b></h4>
+          <p class="card-text">{{game.description}}</p>
+          <a href="{{game.trailer_link}}" target="_blank"></a>
+          <p class="card-text"><small class="text-muted">{{game.date|date}}</small></p>
+        </div>
+      </div>
+
+      <form  action="{%url 'singlegame' game.id%}" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+    
+        {% bootstrap_form form%}
+        <input type="submit" class="btn btn-success btn-lg" value="Post Review">
+      </form>
+    </div>
+    <div class="col">
+      {% for reviews in all_reviews %}
+      {{reviews.review}}
+
+      {%endfor%}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+
+{% video game.video 'small' %}
 
 
 
 <h3 class="text-center m-4">Game</h3>
 <hr>
     <div class = container>
+      <div class="row">
+        <div class="column">
+
+      
         <div class="card" >
             <img class="card-img-top" width="500" height="500" src="" alt="-------">
             <div class="card-body">
@@ -17,12 +57,20 @@
             </div>
           </div>
 
+          <form  action="{%url 'uploadgame'%}" method="post" enctype="multipart/form-data">
+            {%csrf_token%}
+        
+            {% bootstrap_form form%}
+            <input type="submit" class="btn btn-success btn-lg" value="Post Review">
+          </form>
         <div class="col-md-4">
             <p><strong>Overall Rating</strong></p>
             <span>{% ratings game icon_height=20 icon_width=20 %}</span>
+          </div>
 
         </div>
+        <div class="column">
+
+      </div>
     </div>
 </div>
-{% endblock %}
-

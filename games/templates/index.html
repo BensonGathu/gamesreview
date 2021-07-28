@@ -1,14 +1,13 @@
 {% extends 'base.html'%}
 {% load embed_video_tags %}
 
-{% video item.video 'small' %}
 
 
 {% block content %}
 {% for game in games %}
  {{game.title}}
 
-<a href="{{game.trailer_link}}" target="_blank" ><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+<a href="{{game.video}}" target="_blank" ><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
 
 {% video game.video 'small' %}
 {%endfor%}

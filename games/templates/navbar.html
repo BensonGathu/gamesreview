@@ -9,7 +9,7 @@
     <form class="container-fluid justify-content-center">
       <button class="btn btn-sm btn-outline-secondary" type="button"><a class="dropdown-item" href="{% url 'index'%}">Reviews</a></button>
       <button class="btn btn-sm btn-outline-secondary" type="button"><a class="dropdown-item" href="">Games</a></button>
-      <button class="btn btn-sm btn-outline-secondary" type="button"><a class="dropdown-item" href="">Profile</a></button>
+      <button class="btn btn-sm btn-outline-secondary" type="button"><a class="dropdown-item" href="{% url 'profile'%}">Profile</a></button>
   
     </form>
     <form class="d-flex" action="{% url 'searchgame'%}">
