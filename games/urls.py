@@ -10,6 +10,8 @@ urlpatterns = [
     path('search/',views.search_game,name='searchgame'),
     path('profile/',views.profile,name='profile'),
     path('uploadgame/',views.upload_game,name='uploadgame'),
+    path('register/',views.register,name='register'),
+    path('logout/',views.logoutpage,name='logoutpage'),
 ]
 
 if settings.DEBUG:

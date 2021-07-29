@@ -7,13 +7,15 @@
 <div class="container-fluid">
 {% for game in games %}
 <div class="row">
- <div class="card" style="width: 18rem;">
+  <div class="col-md-3">
+ <div class="card bg-light" style="width: 18rem;">
     {% video game.video 'small' %}
     <div class="card-body">
       <h5 class="card-title">{{game.title}}</h5>
       <p class="card-text"><a href="{{game.video}}" target="_blank" ><i class="fa fa-youtube-play" aria-hidden="true"></i></a></p>
       <a href="{%url 'singlegame' game.id%}" class="btn btn-primary">Review</a>
     </div>
+</div>
 </div>
 {%endfor%}
 </div>

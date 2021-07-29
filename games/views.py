@@ -3,8 +3,31 @@ from . models import Profile,Game,Review
 from .forms import GameUploadForm,NewReviewForm,ProfileForm
 from embeddify import Embedder
 from django.http import HttpResponseRedirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+           
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+
+    return render(request,'registration/register.html',{"form":form})
+
+def logoutpage(request):
+    logout(request)
+    return redirect('login')
+
+
 
 def index(request):
     
@@ -29,9 +52,9 @@ def reviews(request,id):
         return HttpResponseRedirect(request.path_info)
     else:
         form = NewReviewForm()
-    return render(request,'reviews.html',{"all_reviews":all_reviews,"form":form})
+    return render(request,'game.html',{"all_reviews":all_reviews,"form":form})
 
-
+@login_required(login_url="login")
 def singlegame(request,id):
     all_reviews = Review.get_reviews(id)
     game = get_object_or_404(Game,pk=id)
@@ -50,6 +73,7 @@ def singlegame(request,id):
 
     return render(request,'game.html',{"game":game,"all_reviews":all_reviews,"form":form})
 
+@login_required(login_url="login")
 def profile(request):
     try:
         profile = request.user.profile
@@ -69,6 +93,7 @@ def profile(request):
     return render(request,'profile.html',{"user":user,"profile":profile,"games":games,"form":form})
 
 
+@login_required(login_url="login")
 def upload_game(request):
     current_user = request.user
     if request.method == 'POST':
@@ -81,6 +106,7 @@ def upload_game(request):
     else:
         form = GameUploadForm()
     return render(request,'gameform.html',{"form":form})
+
 def search_game(request):
     if 'game' in request.GET and request.GET['game']:
         search_game = request.GET.get('game')

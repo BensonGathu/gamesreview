@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-light" >
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -7,19 +7,23 @@
         
   
     <form class="container-fluid justify-content-center">
-      <button class="btn btn-sm btn-outline-secondary" type="button"><a class="dropdown-item" href="{% url 'index'%}">Reviews</a></button>
-      <button class="btn btn-sm btn-outline-secondary" type="button"><a class="dropdown-item" href="">Games</a></button>
-      <button class="btn btn-sm btn-outline-secondary" type="button"><a class="dropdown-item" href="{% url 'uploadgame'%}">Add Game</a></button>
-      <button class="btn btn-sm btn-outline-secondary" type="button"><a class="dropdown-item" href="{% url 'profile'%}">Profile</a></button>
+      <button class="btn btn-sm btn-outline-success" type="button"><a style="color: white;" class="dropdown-item" href="{% url 'index'%}">Reviews</a></button>
+      <button class="btn btn-sm btn-outline-success" type="button"><a style="color: white;" class="dropdown-item" href="#">Games</a></button>
+      <button class="btn btn-sm btn-outline-success" type="button"><a style="color: white;" class="dropdown-item" href="{% url 'uploadgame'%}">Add Game</a></button>
       
   
     </form>
+    <a style="padding-right: 15px;" href="{%url 'profile'%}"><i style="color: white;" class="fa fa-user fa-2x" aria-hidden="true"></i></a>
+    <a style="padding-right: 15px;" href="{%url 'login'%}"><i style="color: white;" class="fa fa-sign-in fa-2x" aria-hidden="true"></i></a>
     <form class="d-flex" action="{% url 'searchgame'%}">
       <input class="form-control me-2" type="search" placeholder="Search Game" aria-label="Search" name="game" >
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
         
+      
       </div>
+      
+
   </div>
   </nav>
   
