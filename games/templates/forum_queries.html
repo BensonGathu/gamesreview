@@ -19,12 +19,12 @@
 
         </div>
       </div>
-      {{query.forum.id}}
+      
       
 
       {%endfor%}
       <div class="container">
-        <form action=" " method="post">
+        <form action="{%url 'game_queries' forum.id%} " method="post">
           {% csrf_token %}
           {% if form.errors %}
           <p>Error in the form </p>

@@ -62,7 +62,7 @@ class Profile(models.Model):
     profile_pic = models.ImageField(upload_to='images/',default='SOME IMAGE')
     bio = models.CharField(max_length=250)
     contact = models.IntegerField(null=True)
-    forum = models.ForeignKey(Forum,on_delete=models.CASCADE, related_name='user_forum',null=True)
+    forum = models.ManyToManyField(Forum, related_name='user_forum',null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
