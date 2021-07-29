@@ -154,5 +154,50 @@ def game_forums(request,id):
 
 def get_queries(request,id):
     queries = Query.objects.filter(forum=id)
+    if request.method == 'POST':
+        form = QueryForm(request.POST or None,request.FILES)
+        if form.is_valid():
+            query = form.save(commit=False)
+            query.user = request.user
+            query.forum = id
+            query.save()
+        return redirect('game_forums',id)
+    else:
+        form = QueryForm()
+       
+    return render(request,'forum_queries.html',{"queries":queries,"form":form})
 
-    return render(request,'forum_queries.html',{"queries":queries})
+def create_query(request):
+    forum =  request.user.profile.query_forum
+    form = QueryForm()
+    if request.method == 'POST':
+        form = QueryForm(request.POST or None,request.FILES)
+        if form.is_valid():
+            query = form.save(commit=False)
+            query.user = request.user
+            query.forum =  forum
+            query.save()
+        return redirect('game_forums',id)
+    else:
+        form = QueryForm()
+     
+    return render(request,'createquery.html',{"form":form,"forum":forum})
+
+def get_answers(request,id):
+    all_answer = Answers.get_all_answers(id)
+    query = get_object_or_404(Query, pk=id)
+    
+    form = AnswersForm()
+    if request.method == 'POST':
+        form = AnswersForm(request.POST)
+        if form.is_valid():
+            answer = form.save(commit=False)
+            answer.query = query
+            answer.author = request.user
+            answer.save()
+        return HttpResponseRedirect(request.path_info)       
+        # return redirect('comments')
+
+    else:
+        form = AnswersForm()
+    return render(request,"replies.html",{"all_answer":all_answer,"form":form})

@@ -1,0 +1,39 @@
+{% extends 'base.html'%}
+{% load crispy_forms_tags %}
+{% load django_bootstrap5 %}
+{% block content %}
+
+{% if all_answer %}
+<div class="col-md-5">
+    {% for answer in all_answer %}
+    
+    <div class="card "  style="width: 18rem;">
+      
+      <div class="card-body">
+      
+        <p class="card-text"><b>{{answer.author}}:</b> <i>{{answer.answer}}</i></p>
+        <span><a href="{{reviews.link}}" target="_blank">{{answer.link}}</a></span>
+      
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+
+{%else%}
+No answers yet
+{%endif%}
+    <form action="#" method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+        <p>Error in the form </p>
+        {% endif %}
+
+        {%bootstrap_form form%}
+
+        <input type="submit" value="Reply">
+    </form>
+</body>
+</html>
+{{forum}}
+
+{%endblock%}
