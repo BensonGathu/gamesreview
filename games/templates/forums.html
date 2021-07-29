@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load ratings %}
+{% load django_bootstrap5 %}
+{% block content %}
+
+<div class="container-fluid">
+  <div class="row">
+{% for forum in forums%}
+<div class="col-md-3">
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><b>{{forum.title}}</b></h5>
+      <p class="card-text">{{forum.desc}}</p>
+      <a href="#" class="btn btn-primary">Join</a>
+      <a href="{%url 'game_queries' forum.id%}" class="btn btn-primary">more</a>
+    </div>
+  </div>
+</div>
+{%endfor%}
+</div>
+</div>
+
+<div class="container">
+<form action="{% url 'game_forums' game.id%}" method="post">
+  {% csrf_token %}
+  {% if form.errors %}
+  <p>Error in the form </p>
+  {% endif %}
+
+  {%bootstrap_form form%}
+
+  <input type="submit" value="Create">
+</form>
+</div>
+{%endblock%}

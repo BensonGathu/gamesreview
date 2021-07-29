@@ -3,7 +3,7 @@
 {% load django_bootstrap5 %}
 {% block content %}
 
-    <form action="{% url 'register' %}" method="post">
+    <form action="{% url 'createforum' %}" method="post">
         {% csrf_token %}
         {% if form.errors %}
         <p>Error in the form </p>

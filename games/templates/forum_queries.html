@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load ratings %}
+{% block content %}
+{% load django_bootstrap5 %}
+{% load embed_video_tags %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-5">
+      {% for query in queries %}
+      
+      <div class="card "  style="width: 18rem;">
+        
+        <div class="card-body">
+        
+          <p class="card-text"><b>{{query.user}}:</b> <i>{{query.title}}</i></p>
+          <span><a href="{{reviews.link}}" target="_blank">{{query.link}}</a></span>
+          <a style="padding-right: 15px;" href="{%url 'profile'%}"><i class="fa fa-reply-all" aria-hidden="true"></i>
+          </a>
+
+        </div>
+      </div>
+      {%endfor%}
+    </div>
+    </div>
+</div>
+
+
+{%endblock%}

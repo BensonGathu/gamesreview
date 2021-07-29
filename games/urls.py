@@ -12,6 +12,9 @@ urlpatterns = [
     path('uploadgame/',views.upload_game,name='uploadgame'),
     path('register/',views.register,name='register'),
     path('logout/',views.logoutpage,name='logoutpage'),
+    path('forums/<int:id>/',views.game_forums,name='game_forums'),
+    path('queries/<int:id>/',views.get_queries,name='game_queries'),
+    # path('createforum/<int:id>/',views.createforum,name='createforum'),
 ]
 
 if settings.DEBUG:

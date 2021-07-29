@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from . models import Profile,Game,Review
-from .forms import GameUploadForm,NewReviewForm,ProfileForm
+from . models import Profile,Game,Review,Forum,Query,Answers
+from .forms import GameUploadForm,NewReviewForm,ProfileForm,ForumForm,QueryForm,AnswersForm
 from embeddify import Embedder
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
@@ -58,6 +58,7 @@ def reviews(request,id):
 def singlegame(request,id):
     all_reviews = Review.get_reviews(id)
     game = get_object_or_404(Game,pk=id)
+    
 
     form = NewReviewForm()
     if request.method == 'POST':
@@ -119,3 +120,39 @@ def search_game(request):
         message = "Search a game"
         return render(request,'results.html',{"message":message})
 
+
+@login_required(login_url='login')
+def join_forum(request, id):
+    forum = get_object_or_404(Forum, id=id)
+    request.user.profile.forum = forum
+    request.user.profile.save()
+    return redirect('singlegame')
+
+@login_required(login_url='login')
+def leave_forum(request, id):
+    hood = get_object_or_404(Forum, id=id)
+    request.user.profile.hood = None
+    request.user.profile.save()
+    return redirect('singlegame')
+
+def game_forums(request,id):
+    forums = Forum.get_forums(id=id)
+    game = get_object_or_404(Game, id=id)
+    user = request.user
+    if request.method == 'POST':
+        form = ForumForm(request.POST or None,request.FILES)
+        if form.is_valid():
+            forum = form.save(commit=False)
+            forum.game = game
+            forum.user = user
+            forum.save()
+        return redirect('game_forums',id)
+    else:
+        form = ForumForm()
+
+    return render(request,'forums.html',{"forums":forums,"game":game,"form":form})
+
+def get_queries(request,id):
+    queries = Query.objects.filter(forum=id)
+
+    return render(request,'forum_queries.html',{"queries":queries})
