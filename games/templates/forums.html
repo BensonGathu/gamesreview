@@ -14,13 +14,13 @@
     <div class="card-body">
       <h5 class="card-title"><b>{{forum.title}}</b></h5>
       <p class="card-text">{{forum.desc |truncatechars:100 }}</p>
-      {% if request.user.profile.forum %}
-      <a href="{%url 'leave_forum' forum.id%}" class="btn btn-primary">Leave Forum</a>
+      
+      <a href="#" class="btn btn-primary">Join Forum</a>
       <a href="{%url 'game_queries' forum.id%}" class="btn btn-primary">more</a>
-      {% elif not request.user.profile.forum %}
-      <a href="{%url 'join_forum' forum.id%}" class="btn btn-primary">Join Forum</a>
+      
+     
 
-      {%endif%}
+     
 
       
     </div>
