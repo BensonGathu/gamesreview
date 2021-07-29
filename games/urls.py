@@ -15,7 +15,9 @@ urlpatterns = [
     path('forums/<int:id>/',views.game_forums,name='game_forums'),
     path('queries/<int:id>/',views.get_queries,name='game_queries'),
     # path('newquery/',views.create_query,name="newquery"),
-    path('reply/<int:id>/',views.get_answers,name="answers")
+    path('reply/<int:id>/',views.get_answers,name="answers"),
+    path('join_forum/<int:id>/', views.join_forum, name='join_forum'),
+    path('leave_forum/<int:id>/', views.leave_forum, name='leave_forum'),
     # path('createforum/<int:id>/',views.createforum,name='createforum'),
 ]
 

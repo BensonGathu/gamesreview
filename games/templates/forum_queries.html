@@ -4,8 +4,10 @@
 {% load django_bootstrap5 %}
 {% load embed_video_tags %}
 <div class="container-fluid">
+  
+
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-6">
       {% for query in queries %}
       
       <div class="card "  style="width: 18rem;">
@@ -16,27 +18,36 @@
           <span><a href="{{reviews.link}}" target="_blank">{{query.link}}</a></span>
           <a style="padding-right: 15px;" href="{%url 'answers' query.id%}"><i class="fa fa-reply-all" aria-hidden="true"></i>
           </a>
-
+          {{query.answers.count}} responses
         </div>
       </div>
       
       
 
       {%endfor%}
-      <div class="container">
-        <form action="{%url 'game_queries' forum.id%} " method="post">
-          {% csrf_token %}
-          {% if form.errors %}
-          <p>Error in the form </p>
-          {% endif %}
-        
-          {%bootstrap_form form%}
-        
-          <input type="submit" value="Create">
-        </form>
-        </div> 
+      
+    </div>
+    <div class="col-md-6">
+      
+
+    
+    <div class="container w-75 p-3">
+      <h5>Add Query</h5>
+      <form action="{%url 'game_queries' forum.id%} " method="post">
+        {% csrf_token %}
+        {% if form.errors %}
+        <p>Error in the form </p>
+        {% endif %}
+      
+        {%bootstrap_form form%}
+      
+        <input type="submit" value="Create">
+      </form>
+      </div> 
     </div>
     </div>
+
+
 </div>
 
 {%endblock%}

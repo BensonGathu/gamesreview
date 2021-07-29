@@ -4,15 +4,25 @@
 {% block content %}
 
 <div class="container-fluid">
+  <div><a href="{%url 'singlegame' game.id%}" class="btn btn-primary">Back</a>
+
+  </div>
   <div class="row">
 {% for forum in forums%}
 <div class="col-md-3">
 <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title"><b>{{forum.title}}</b></h5>
-      <p class="card-text">{{forum.desc}}</p>
-      <a href="#" class="btn btn-primary">Join</a>
+      <p class="card-text">{{forum.desc |truncatechars:100 }}</p>
+      {% if request.user.profile.forum %}
+      <a href="{%url 'leave_forum' forum.id%}" class="btn btn-primary">Leave Forum</a>
       <a href="{%url 'game_queries' forum.id%}" class="btn btn-primary">more</a>
+      {% elif not request.user.profile.forum %}
+      <a href="{%url 'join_forum' forum.id%}" class="btn btn-primary">Join Forum</a>
+
+      {%endif%}
+
+      
     </div>
   </div>
 </div>
@@ -20,7 +30,8 @@
 </div>
 </div>
 
-<div class="container">
+<div class="container w-50 p-3">
+  <h4 style="text-align: center;">Add Forum</h4>
 <form action="{% url 'game_forums' game.id%}" method="post">
   {% csrf_token %}
   {% if form.errors %}

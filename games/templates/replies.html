@@ -2,7 +2,10 @@
 {% load crispy_forms_tags %}
 {% load django_bootstrap5 %}
 {% block content %}
-
+<div>
+  <a href="{%url 'game_queries' forum.id%}" class="btn btn-primary">Back</a>
+  <p class="card-text"><b>{{query.user}}:</b> <i>{{query.title}}</i></p>
+</div>
 {% if all_answer %}
 <div class="col-md-5">
     {% for answer in all_answer %}
@@ -22,6 +25,7 @@
 {%else%}
 No answers yet
 {%endif%}
+<div class="container w-50 p-3">
     <form action="#" method="post">
         {% csrf_token %}
         {% if form.errors %}
@@ -32,8 +36,7 @@ No answers yet
 
         <input type="submit" value="Reply">
     </form>
+  </div>
 </body>
-</html>
-{{forum}}
 
 {%endblock%}

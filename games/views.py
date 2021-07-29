@@ -126,14 +126,14 @@ def join_forum(request, id):
     forum = get_object_or_404(Forum, id=id)
     request.user.profile.forum = forum
     request.user.profile.save()
-    return redirect('singlegame')
+    return redirect('game_forums',id)
 
 @login_required(login_url='login')
 def leave_forum(request, id):
-    hood = get_object_or_404(Forum, id=id)
-    request.user.profile.hood = None
+    forum = get_object_or_404(Forum, id=id)
+    request.user.profile.forum = None
     request.user.profile.save()
-    return redirect('singlegame')
+    return redirect('game_forums',id)
 
 def game_forums(request,id):
     forums = Forum.get_forums(id=id)
@@ -153,7 +153,7 @@ def game_forums(request,id):
     return render(request,'forums.html',{"forums":forums,"game":game,"form":form})
 
 def get_queries(request,id):
-    queries = Query.objects.filter(forum=id)
+    queries = Query.objects.filter(forum=id).order_by("-id")
     forum = get_object_or_404(Forum, id=id)
     if request.method == 'POST':
         form = QueryForm(request.POST or None,request.FILES)
@@ -187,7 +187,7 @@ def get_queries(request,id):
 def get_answers(request,id):
     all_answer = Answers.get_all_answers(id)
     query = get_object_or_404(Query, pk=id)
-    
+    forum = query.forum
     form = AnswersForm()
     if request.method == 'POST':
         form = AnswersForm(request.POST)
@@ -201,4 +201,4 @@ def get_answers(request,id):
 
     else:
         form = AnswersForm()
-    return render(request,"replies.html",{"all_answer":all_answer,"form":form})
+    return render(request,"replies.html",{"all_answer":all_answer,"form":form,"query":query,"forum":forum})

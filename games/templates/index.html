@@ -5,11 +5,12 @@
 
 {% block content %}
 <div class="container-fluid">
-{% for game in games %}
-<div class="row">
-  <div class="col-md-3">
- <div class="card bg-light" style="width: 18rem;">
-    {% video game.video 'small' %}
+  <div class="row">
+  {% for game in games %}
+
+  <div class="col-md-4">
+ <div class="card" style="width: 18rem;">
+  {% video game.video '400x300'  %}
     <div class="card-body">
       <h5 class="card-title">{{game.title}}</h5>
       <p class="card-text"><a href="{{game.video}}" target="_blank" ><i class="fa fa-youtube-play" aria-hidden="true"></i></a></p>
@@ -22,12 +23,3 @@
 </div>
 {%endblock%}
 
-
-<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
-    </div>
-  </div>
